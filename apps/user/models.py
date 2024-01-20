@@ -15,7 +15,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     is_Seller = models.BooleanField(default=False)
 
-    USERNAME_FILED = 'email'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
@@ -27,9 +27,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 class User(MyUser):
     name = models.CharField(max_length=255, null=True, blank=True)
     second_name = models.CharField(max_length=255, null=True, blank=True)
-    phone = models.CharField(max_length=255, null=False, blank=False)
-    address = models.CharField(max_length=255, null=False, blank=False)
-    card_number = models.CharField(max_length=255, null=False, blank=False)
+    phone = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    card_number = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.email
