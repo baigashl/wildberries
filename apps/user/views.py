@@ -25,6 +25,7 @@ class SellerRegisterView(APIView):
                 second_name=request.data['second_name'],
                 phone=request.data['phone'],
                 address=request.data['address'],
+                is_Seller=True,
             )
             seller.set_password(request.data['password'])
             seller.save()

@@ -4,8 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer
 
 
 class ProductListAPIView(generics.ListCreateAPIView):
@@ -30,4 +30,19 @@ class ProductCreateAPIView(generics.CreateAPIView):
 #         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class CategoryCreateAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
 
+    def post(self, request):
+        data = request.data['data']
+        for category in data:
+            serializer = CategorySerializer(data=category)
+            if serializer.is_valid():
+                name = category['name']
+                cat = Category.objects.get(name=name)
+                if cat is None:
+                    cat = Category.objects.create(
+                        name=category['name']
+                    )
+                    cat.save()
+        return Response({'response': 'created'}, status=status.HTTP_201_CREATED)
