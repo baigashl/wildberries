@@ -4,12 +4,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Product, Category
+from apps.user.models import User
+from apps.user.serializers import UserSerializer
 from .serializers import ProductSerializer, CategorySerializer
 
 
-class ProductListAPIView(generics.ListCreateAPIView):
-    serializer_class = ProductSerializer
+class ProductListAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
 
