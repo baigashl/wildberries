@@ -20,6 +20,12 @@ class ProductCreateAPIView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+    queryset = Product.objects.all()
+
+
 class CategoryListAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CategorySerializer
