@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255, null=False)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}, {self.id}'
 
 
 class Product(models.Model):
@@ -21,4 +21,4 @@ class Product(models.Model):
     timestamp = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}, {self.id}'

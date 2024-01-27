@@ -34,15 +34,10 @@ class CategoryCreateAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        data = request.data['data']
-        for category in data:
-            serializer = CategorySerializer(data=category)
+        data = request.data.get('data', [])
+        for category_data in data:
+            serializer = CategorySerializer(data=category_data)
             if serializer.is_valid():
-                name = category['name']
-                cat = Category.objects.get(name=name)
-                if cat is None:
-                    cat = Category.objects.create(
-                        name=category['name']
-                    )
-                    cat.save()
+                name = category_data['name']
+                Category.objects.get_or_create(name=name)
         return Response({'response': 'created'}, status=status.HTTP_201_CREATED)
