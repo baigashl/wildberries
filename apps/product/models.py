@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255, null=False)
 
     def __str__(self):
-        return f'{self.name}, {self.id}'
+        return f'{self.name}'
 
 
 class Product(models.Model):
@@ -22,3 +22,8 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.id}'
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)

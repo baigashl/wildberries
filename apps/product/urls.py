@@ -1,4 +1,6 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+
 from .views import(
     ProductListAPIView,
     ProductCreateAPIView,
@@ -7,6 +9,9 @@ from .views import(
     ProductDetailAPIView,
     ProductUpdateAPIView,
     ProductDeleteAPIView,
+    ProductViewSet,
+    ProductFilterListAPIView,
+    CartAPIView
 )
 
 urlpatterns = [
@@ -17,4 +22,11 @@ urlpatterns = [
     path('create/', ProductCreateAPIView.as_view(), name='product-create'),
     path('<int:pk>/', ProductUpdateAPIView.as_view(), name='product-update'),
     path('<int:pk>/delete/', ProductDeleteAPIView.as_view(), name='product-delete'),
+
+    path('cart/<int:id>', CartAPIView.as_view(), name='cart'),
+
+    path('filter/', ProductFilterListAPIView.as_view(), name='product-filter'),
 ]
+# router = DefaultRouter()
+# router.register(r'products', ProductViewSet)
+# urlpatterns = router.urls
