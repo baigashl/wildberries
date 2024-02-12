@@ -27,6 +27,13 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
 class CartSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    products = ProductSerializer(many=True)
+    class Meta:
+        model = Cart
+        fields = "__all__"
+
+
+class CartUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = "__all__"
